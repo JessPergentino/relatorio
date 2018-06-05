@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioMensal" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isFloatColumnFooter="true" uuid="0af597e3-d921-460c-ab1b-994651305ce4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="net.sf.jasperreports.print.create.bookmarks" value="true"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="saldo" class="java.lang.Double">
+		<fieldDescription><![CDATA[saldo]]></fieldDescription>
+	</field>
+	<field name="debitos" class="java.util.List">
+		<fieldDescription><![CDATA[debitos]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="21" width="179" height="30" uuid="c5cd15da-5ed0-4320-a44a-5338a41d7d57"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gastos do Mês]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="49" width="100" height="30" uuid="88b7ae44-2980-46c3-994a-52799a5fd4df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Gerado em:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="460" y="49" width="90" height="30" uuid="f2062e5e-c362-4c06-b780-6c884c2644d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="7" width="370" height="39" uuid="bb1aa893-f5ac-47d8-b8aa-2157b61b31ce"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Neste relatório você irá encontrar informações detalhadas sobre todos os seus gastos.]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="131" splitType="Stretch">
+			<staticText>
+				<reportElement x="60" y="0" width="448" height="40" uuid="02af2ec2-c349-4d0d-b2e7-33f93b7a4a23"/>
+				<textElement>
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[Aqui abaixo temos uma lista de todos os gastos dos seus cartões e contas para você ter um maior contole sobre as suas economias:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="50" width="100" height="20" uuid="ab4a7ebd-aee8-41ac-a9fb-08a6207377c6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="50" width="179" height="30" uuid="8390ea2e-20ce-47f0-90c4-89bd75d09878"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cartões de Crédito]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="70" width="100" height="30" uuid="7b7dcb55-15ef-48ae-8807-a0bf3194c255"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="70" width="100" height="30" uuid="d25d26b2-019e-4c9b-ab39-3299556b928e"/>
+				<textFieldExpression><![CDATA[$F{saldo}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="10" y="100" width="200" height="30" uuid="d0593912-f85f-4cd4-818d-1186e95c092a"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{debitos})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "debitos.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
