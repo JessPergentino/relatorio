@@ -1,6 +1,7 @@
 package br.com.loov.mycash.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,21 +28,21 @@ public class RelatorioMensalController extends HttpServlet {
 
 		int idUsuario = Integer.parseInt(request.getParameter("idUsuario"));
 		System.out.println(idUsuario);
-		// acha jrxml dentro da aplicação
-		ServletContext contexto = request.getServletContext();
-		String jasper = contexto.getRealPath("relatorio/relatorioMensal.jasper");
-		String jasperSub = contexto.getRealPath("relatorio/");
+		// acha jasper dentro da aplicação
+		InputStream jasper1 = getClass().getResourceAsStream("/relatorio/relatorioMensal.jasper");
+		InputStream jasper2 = getClass().getResourceAsStream("/relatorio/debitos.jasper");
+		
 
 		// prepara parâmetros
 		Map<String, Object> parametros = new HashMap<>();
 		
-		parametros.put("SUBREPORT_DIR",jasperSub);
+		parametros.put("SUBREPORT_DIR",jasper2);
 		
 
 		// gera relatório
 		List<Conta> listaConta = dao.listar(idUsuario);
 		GeradorRelatorio gerador = new GeradorRelatorio(new JRBeanCollectionDataSource(listaConta));
-		gerador.geraPdf(jasper, parametros, response.getOutputStream());
+		gerador.geraPdf(jasper1, parametros, response.getOutputStream());
 
 	}
 

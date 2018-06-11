@@ -1,5 +1,6 @@
 package br.com.loov.mycash.relatorio;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
@@ -24,13 +25,13 @@ public class GeradorRelatorio {
 		this.jrBeanCollectionDataSource = jrBeanCollectionDataSource;
 	}
 
-	public void geraPdf(String jasper, 
+	public void geraPdf(InputStream jasper1, 
         Map<String, Object> parametros, OutputStream saida) {
 
         try {
     
             // preenche relatorio
-            JasperPrint print = JasperFillManager.fillReport(jasper, parametros, this.jrBeanCollectionDataSource);
+            JasperPrint print = JasperFillManager.fillReport(jasper1, parametros, this.jrBeanCollectionDataSource);
 
             // exporta para pdf
             JRExporter exporter = new JRPdfExporter();
